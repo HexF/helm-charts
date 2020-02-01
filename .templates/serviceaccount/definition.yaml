@@ -1,0 +1,8 @@
+{{- if .Values.__CONFIG__.__NAME__.create -}}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "__GLOBAL__.__NAME__serviceAccountName" . }}
+  labels:
+{{ include "__GLOBAL__.labels" . | nindent 4 }}
+{{- end -}}

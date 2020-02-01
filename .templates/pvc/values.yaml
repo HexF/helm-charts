@@ -1,0 +1,7 @@
+__CONFIG__:
+    __NAME__:
+        name: ""
+        create: true
+        size: 10Gi
+        accessModes:
+            - ReadWriteMany
