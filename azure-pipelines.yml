@@ -16,6 +16,9 @@ stages:
       - job: deps
         displayName: "Install Dependencies"
         steps: 
+          - task: HelmInstaller@1
+            inputs:
+              helmVersionToInstall: 'latest'
           - bash: "sudo apt-get install python3-pip make"
       - job: make
         displayName: "Run Makefile"
