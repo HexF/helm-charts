@@ -1,0 +1,32 @@
+{{- if and .Values.ingress.enabled (.Values.ingress.traefik) -}}
+{{- $fullName := include "firefly-iii.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "firefly-iii.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  entryPoints: []
+  routes:
+  {{- range .Values.ingress.hosts }}
+    {{- $host := .host -}}
+    {{- range .paths }}
+    - kind: Rule
+      match: Host(`{{ $host }}`) && PathPrefix(`{{ . }}`)
+      middlewares: []
+      priority: 0
+      services:
+        - kind: Service
+          name: {{ $fullName }}
+          port: {{ $svcPort }}
+    {{- end }}      
+  {{- end }}
+
+{{- end -}}
