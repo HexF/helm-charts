@@ -15,27 +15,18 @@ stages:
     jobs:
       - job: deps
         displayName: "Install Dependencies"
-        script: |
-          apt-get install python3-pip
-          apt-get install make
+        steps: 
+          bash: |
+            apt-get install python3-pip
+            apt-get install make
       - job: make
         displayName: "Run Makefile"
-        script: "make"
+        steps:
+          bash: "make"
   - stage: publish
     displayName: "Publish to Repository"
     jobs:
       - job: publ
         displayName: "Publish"
-        script: "echo Publishing!"
-
-
-
-
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+        steps:
+          bash: "echo Publishing!"
