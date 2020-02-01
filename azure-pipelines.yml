@@ -16,9 +16,7 @@ stages:
       - job: deps
         displayName: "Install Dependencies"
         steps: 
-          - bash: |
-              apt-get install python3-pip
-              apt-get install make
+          - bash: "sudo apt-get install python3-pip make"
       - job: make
         displayName: "Run Makefile"
         steps:
