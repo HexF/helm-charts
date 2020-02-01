@@ -16,17 +16,17 @@ stages:
       - job: deps
         displayName: "Install Dependencies"
         steps: 
-          bash: |
-            apt-get install python3-pip
-            apt-get install make
+          - bash: |
+              apt-get install python3-pip
+              apt-get install make
       - job: make
         displayName: "Run Makefile"
         steps:
-          bash: "make"
+          - bash: "make"
   - stage: publish
     displayName: "Publish to Repository"
     jobs:
       - job: publ
         displayName: "Publish"
         steps:
-          bash: "echo Publishing!"
+          - bash: "echo Publishing!"
